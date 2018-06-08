@@ -3,7 +3,8 @@
     "description": "Automate the creation of marketing material for social media straight from your codebase!",
     "type": "library",
     "require": {
-        "intervention/image": "^2.4"
+        "intervention/image": "^2.4",
+        "guzzlehttp/guzzle": "^6.3"
     },
     "autoload": {
         "psr-4": {
