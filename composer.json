@@ -1,0 +1,32 @@
+{
+    "name": "audiogram/socializer",
+    "description": "Automate the creation of marketing material for social media straight from your codebase!",
+    "type": "library",
+    "require": {
+        "intervention/image": "^2.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Audiogram\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Audiogram\\Socializer\\SocializerServiceProvider",
+                "Intervention\\Image\\ImageServiceProvider"
+            ],
+            "aliases": {
+                "Image": "Intervention\\Image\\Facades\\Image"
+            }
+        }
+    },
+    "license": "MIT",
+    "authors": [{
+        "name": "Omar Rida",
+        "email": "omar@audiogram.me"
+    }]
+}
