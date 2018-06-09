@@ -40,6 +40,7 @@ Pick a model that you'd like to start creating social media posts for. In this e
 Simply add the `SocializableInterface` on your model and implement the `toSocializable()` method.
 
 ```php
+use Illuminate\Database\Eloquent\Model;
 use Audiogram\Socializer\SocializableInterface;
 
 class Event extends Model implements SocializableInterface
