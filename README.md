@@ -82,3 +82,7 @@ guzzlehttp/guzzle: ^6.3
 ## Issues
 
 If you find yourself stuck, encounter a bug, or have any questions/suggestions for improving this package, feel free to create an issue on GitHub and I'll try to address it as soon as possible.
+
+## License
+
+This project conforms to the MIT License (MIT).
