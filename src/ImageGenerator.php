@@ -3,47 +3,66 @@
  * Created by PhpStorm.
  * User: omarrida
  * Date: 4/6/18
- * Time: 7:37 PM
+ * Time: 7:37 PM.
  */
 
 namespace Audiogram\Socializer;
 
 use Intervention\Image\Facades\Image;
 
+/**
+ * Class ImageGenerator.
+ *
+ * @package Audiogram\Socializer
+ */
 class ImageGenerator
 {
-    private $textOverlay;
-    private $backgroundImagePath;
-    private $backgroundImage;
-    private $socialImage;
-    private $socialImageFileName;
-    private $socialImageFilePath;
+    /**
+     * @var string
+     */
     public $socialImageUrl;
+    /**
+     * @var string
+     */
+    private $textOverlay;
+    /**
+     * @var string
+     */
+    private $backgroundImagePath;
+    /**
+     * @var \Intervention\Image\Image
+     */
+    private $backgroundImage;
+    /**
+     * @var \Intervention\Image\Image
+     */
+    private $socialImage;
+    /**
+     * @var string
+     */
+    private $socialImageFileName;
+    /**
+     * @var string
+     */
+    private $socialImageFilePath;
 
+    /**
+     * ImageGenerator constructor.
+     *
+     * @param Socializable $socializable
+     */
     public function __construct(Socializable $socializable)
     {
-        $this->textOverlay = $socializable->textOverlay;
+        $this->textOverlay         = $socializable->textOverlay;
         $this->backgroundImagePath = $socializable->backgroundImagePath;
         $this->setSocialImageFilePath();
     }
 
-    private function generateBackgroundImage()
-    {
-        $this->backgroundImage = Image::make($this->backgroundImagePath)->resize(800, 800)->opacity(30);
-    }
-
-    private function setSocialImageFilePath()
-    {
-        $this->setSocialImageFileName();
-        $this->socialImageFilePath = storage_path('app/public/' . $this->socialImageFileName);
-    }
-
-    private function setSocialImageFileName()
-    {
-        $this->socialImageFileName = uniqid('socializer_', true).'.jpg';
-    }
-
-    public function generateSocialImage()
+    /**
+     * Put the background image and overlay together to produce the final image.
+     * Afterwards, store the image at the predefined local storage path.
+     */
+    public function generateSocialImage(): void
     {
         $this->generateBackgroundImage();
         $this->socialImage = Image::canvas(800, 800, '#000')
@@ -57,14 +76,45 @@ class ImageGenerator
         $this->storeSocialImage();
     }
 
-    private function storeSocialImage()
+    /**
+     * Set the asset url at which the final image can be accessed.
+     */
+    public function setSocialImageUrl(): void
+    {
+        $this->socialImageUrl = asset("storage/$this->socialImageFileName");
+    }
+
+    /**
+     * Set the desired background image with resizing and opacity.
+     */
+    private function generateBackgroundImage(): void
+    {
+        $this->backgroundImage = Image::make($this->backgroundImagePath)->resize(800, 800)->opacity(30);
+    }
+
+    /**
+     * Set the local storage path for the resulting image.
+     */
+    private function setSocialImageFilePath(): void
+    {
+        $this->setSocialImageFileName();
+        $this->socialImageFilePath = storage_path('app/public/'.$this->socialImageFileName);
+    }
+
+    /**
+     * Generate a unique name for the final image.
+     */
+    private function setSocialImageFileName(): void
+    {
+        $this->socialImageFileName = uniqid('socializer_', true).'.jpg';
+    }
+
+    /**
+     * Store the final image at the local storage path.
+     */
+    private function storeSocialImage(): void
     {
         $this->socialImage->save($this->socialImageFilePath);
         $this->setSocialImageUrl();
-    }
-
-    public function setSocialImageUrl()
-    {
-        $this->socialImageUrl = asset("storage/$this->socialImageFileName");
     }
 }

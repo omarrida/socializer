@@ -2,15 +2,18 @@
 
 namespace Audiogram\Socializer;
 
-use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\ServiceProvider;
+use Intervention\Image\ImageManagerStatic as Image;
 
+/**
+ * Class SocializerServiceProvider.
+ *
+ * @package Audiogram\Socializer
+ */
 class SocializerServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap services.
-     *
-     * @return void
      */
     public function boot()
     {
@@ -24,8 +27,6 @@ class SocializerServiceProvider extends ServiceProvider
 
     /**
      * Register services.
-     *
-     * @return void
      */
     public function register()
     {
