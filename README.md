@@ -13,7 +13,7 @@ composer require audiogram/socializer
 Then publish the vendor files.
 
 ```
-vendor:publish
+php artisan vendor:publish
 ```
 
 Add your Buffer credentials to the `config/socializer.php` file.
